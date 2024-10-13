@@ -8,7 +8,7 @@ export interface IGrade {
 }
 
 
-export interface Student {
+export interface IStudent {
   _id: Types.ObjectId;
   name: string;
   email: string;
@@ -18,10 +18,29 @@ export interface Student {
 }
 
 const StudentSchema = new Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  classId: { type: Schema.Types.ObjectId, ref: 'Class' },
-  grades: [{ subject: String, grade: Number }],
+  name: {
+    type: String,
+    required: [true, "Please enter username"],
+    unique: true,
+    minlength: [3, "Username must be at least 3 characters"],
+    maxlength: [30, "Username cannot exceed 30 characters"],
+    match:[ /^[a-zA-Z0-9]+$/, "Username can only contain letters and numbers"],
+  },
+  email: {
+    type: String,
+    required: [true, "Please enter email"],
+    unique: true,
+    validate: [validator.isEmail, "Please enter valid email"],
+  },
+  password: {
+    type: String,
+    required: [true, "Please enter password"],
+    minlength: [6, "Password must be at least 6 characters"],
+  },
+  classId: {
+    type: Schema.Types.ObjectId,
+    ref: "Class",
+    }
 });
 
+export default mongoose.model<IStudent>("Post", StudentSchema);
