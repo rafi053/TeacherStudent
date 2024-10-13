@@ -1,13 +1,13 @@
-import { User } from "../models/userModel.js";
-import { createUser, findUserByFullNameAndPassword } from "../DAL/data.js";
+import { IUser } from "../models/userModel.js";
+import * as Auth from "../DAL/data.js";
 
-export const authRegister = async (user: User): Promise<User> => {
-    const userToAdd: User = await createUser(user);  
+export const register = async (user: User): Promise<IUser> => {
+    const userToAdd: IUser = await Auth.register(user);  
     return userToAdd;
   };
 
 
-export const authLogin = async (fullName: string, password: string): Promise<User | null> => {
-    const user: User | null = await findUserByFullNameAndPassword(fullName, password);  
+export const login = async (fullName: string, password: string): Promise<IUser | null> => {
+    const user: IUser | null = await Auth.login(fullName, password);  
     return user;
   };

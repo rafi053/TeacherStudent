@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { authRegister, authLogin } from '../services/authService.js';
+import * as Auth from "../services/authService";
 import jwt from 'jsonwebtoken';
 import { IUser } from '../models/userModel';
 import { ResponseStructure } from "../types/response";
@@ -13,7 +13,7 @@ const JWT_SECRET:string = process.env.JWT_SECRET || "default_secret";
 export const register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const user: IUser = req.body;
-    const createUser : IUser = await authRegister(user);
+    const createUser : IUser = await Auth.register(user);
     const response = new ResponseStructure(true, createUser, "User created successfully");
     res.status(201).json(response);
   } catch (error) {
@@ -24,7 +24,7 @@ export const register = async (req: Request, res: Response, next: NextFunction):
 export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { email, password } = req.body;
-    const user: IUser = await authLogin(email, password);
+    const user: IUser = await Auth.login(email, password);
     if (!user) {
       const response = new ResponseStructure(false, {}, 'Invalid email or password');
       res.status(401).json(response);

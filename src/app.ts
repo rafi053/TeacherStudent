@@ -24,7 +24,6 @@ app.use("/", authRouter);
 app.use(authMiddleware);
 app.use("teachers", teacherRouter);
 app.use("students", studentRouter);
-app.use("grades", gradeRouter);
 
 
 app.use(errorHandler);

@@ -6,15 +6,15 @@ import {
   getAllDetails,
   getGrades,
   
-} from "";
+} from "../controllers/teacherController";
 import { ChangeStream } from "mongodb";
 
 const teacherRouter = Router();
 
-teacherRouter.post("/", addGrade);
-teacherRouter.get("/", getGrades);
-teacherRouter.get("/:id", changGrade);
-teacherRouter.put("/:id", getAverageGrades);
-teacherRouter.delete("/:id", getAllDetails);
+teacherRouter.put("/:id", addGrade);
+teacherRouter.get("/:id", getGrades);
+teacherRouter.put("/:id", changGrade);
+teacherRouter.get("/:id", getAverageGrades);
+teacherRouter.get("/", getAllDetails);
 
 export default teacherRouter;
