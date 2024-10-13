@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createUser, getUser, getUsers } from "../controllers/userController";
 
-const userRouter = Router();
+const teachersRouter = Router();
 
 /**
  * @swagger
@@ -38,7 +38,7 @@ const userRouter = Router();
  *       400:
  *         description: Bad request
  */
-userRouter.post("/", createUser);
+teachersRouter.post("/", createUser);
 
 /**
  * @swagger
@@ -49,7 +49,7 @@ userRouter.post("/", createUser);
  *          200:
  *              description: A JSON of all the users
  */
-userRouter.get("/", getUsers);
+teachersRouter.get("/", getUsers);
 
 /**
  * @swagger
@@ -69,6 +69,6 @@ userRouter.get("/", getUsers);
  *       404:
  *         description: User not found
  */
-userRouter.get("/:username", getUser);
+teachersRouter.get("/:username", getUser);
 
-export default userRouter;
+export default teachersRouter;

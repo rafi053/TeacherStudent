@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import Post, { IComment, IPost } from "../models/postModel";
-import User, { IUser } from "../models/userModel";
+import Post, { IComment, IPost } from "../models/teacherModel";
+import User, { IUser } from "../models/studentModel";
 import { ResponseStructure } from "../types/response";
 
 // Create a new post

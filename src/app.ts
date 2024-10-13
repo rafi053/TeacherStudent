@@ -1,28 +1,32 @@
 import express from "express";
 import dotenv from "dotenv";
-import postRouter from "./routes/postRoutes";
-import userRouter from "./routes/userRoutes";
 import { errorHandler } from "./middleware/errorHandler";
 import connectDB from "./config/db";
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from "./swagger";
+import teacherRouter from "./routes/teacherRouter";
+import studentRouter from "./routes/studentRouter";
+import gradeRouter from "./routes/gradeRouter";
+import authRouter from "./routes/authRouter";
+import authMiddleware from "./middleware/authMiddleware";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.json());
 app.use('/swagger',swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 connectDB();
 
-// Routes
-app.use("/api/posts", postRouter);
-app.use("/api/users", userRouter);
+app.use("/", authRouter);
+
+app.use(authMiddleware);
+app.use("teachers", teacherRouter);
+app.use("students", studentRouter);
+app.use("grades", gradeRouter);
 
 
-// Error handling middleware
 app.use(errorHandler);
 
 app.listen(PORT, () => {
