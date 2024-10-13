@@ -49,8 +49,8 @@ export const getGrades = async (
 ) => {
   const id = req.params.id;
   try {
-    const user: IUser = await Student.getGrades( id );
-    const response = new ResponseStructure(true, user);
+    const student: IStudent | null = await Student.getGrades( id );
+    const response = new ResponseStructure(true, student);
     res.status(200).json(response);
   } catch (error) {
     next(error);

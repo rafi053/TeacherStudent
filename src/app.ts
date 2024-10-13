@@ -6,8 +6,6 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from "./swagger";
 import teacherRouter from "./routes/teacherRouter";
 import studentRouter from "./routes/studentRouter";
-import gradeRouter from "./routes/gradeRouter";
-import authRouter from "./routes/authRouter";
 import authMiddleware from "./middleware/authMiddleware";
 
 dotenv.config();

@@ -9,7 +9,7 @@ export interface IGrade {
 
 
 export interface IStudent {
-  _id: Types.ObjectId;
+  _id?: Types.ObjectId;
   name: string;
   email: string;
   password: string;

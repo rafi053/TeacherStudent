@@ -4,7 +4,7 @@ import { IStudent } from "../models/studentModel.js";
 
 
 export const register = async (name: string, email: string, password: string, classRoom: string): Promise<IStudent | undefined> => {
-  const classId = await studentData.getClass(classRoom);
+  const classId: any = await studentData.getClass(classRoom);
   if (!classId) {
     throw new Error("Class not found");
   }
@@ -15,22 +15,24 @@ export const register = async (name: string, email: string, password: string, cl
     classId
   }
 
-  const studentToAdd: IStudent = await studentData.register(newStudent);
-  await studentData.addClass(studentToAdd._id);
+  const studentToAdd: any  = await studentData.register(newStudent);
+  await studentData.addToClass(studentToAdd._id);
+
+  return studentToAdd
     
 }
 
 
 
 export const login = async (email: string, password: string): Promise<IStudent | null> => {
-  const teacher: IStudent | null = await teacherData.login(email, password);  
-  return teacher;
+  const student: IStudent | null = await studentData.login(email, password);  
+  return student;
 };
 
 
-export const getGrades = async ( id: string): Promise<IUser> => {
-    const user: IUser = await Data.getGrades();  
-    return user;
+export const getGrades = async ( id: string): Promise<IStudent | null> => {
+    const student: IStudent | null = await studentData.getGrades( id);  
+    return student;
   };
 
 

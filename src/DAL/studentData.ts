@@ -1,10 +1,11 @@
-import Student from "../models/studentModel";
-import Teacher from "../models/teacherModel";
+import Student, { IStudent } from "../models/studentModel";
+import Teacher, { ITeacher } from "../models/teacherModel";
 import Class, { IClass } from "../models/classModel";
 import { IUser } from "../models/userModel";
 import exp from "constants";
 import e from "express";
 import { ExitStatus } from "typescript";
+import { ObjectId, Schema } from "mongoose";
 
 
 export  const getClass = async ( classRoom: string) : Promise<IClass | null> => {
@@ -12,21 +13,24 @@ export  const getClass = async ( classRoom: string) : Promise<IClass | null> => 
     return classRoomDetails;
 }
 
-export  const  register = async (teacher: ITeacher): Promise<ITeacher> => {
-    const TeacherToAdd: ITeacher = await Teacher.create(teacher);
-    return TeacherToAdd;
+export  const  register = async (student: IStudent): Promise<IStudent> => {
+    const studentToAdd: IStudent = await Student.create(student);
+    return studentToAdd;
 }
 
 
-export  const  login = async (email: string, password: string): Promise<ITeacher | null> => {
-    const teacher: ITeacher | null = await Teacher.findOne({ email: email, password: password });
+export  const  login = async (email: string, password: string): Promise<IStudent | null> => {
+    const teacher: IStudent | null = await Teacher.findOne({ email: email, password: password });
     return teacher;
 }
 
 
-export  const  getGrades = async (): Promise<IStudent[] | null> => {
-    const students: IStudent[] = await Class.find();
+export  const  getGrades = async (id: string): Promise<IStudent | null> => {
+    const students: IStudent | null = await Class.findById(id);
     return students;
 }
 
-export  const  addToClass = async (id: string, classRoom: IClass): Promise<IStudent | null> => {
+export  const  addToClass = async (id: any): Promise<ITeacher | null> => {
+    const student: any = await Class.updateOne({ _id: id }, { $push: { students: id } });
+    return student;
+}
