@@ -5,12 +5,17 @@ import {
   getAverageGrades,
   getAllDetails,
   getGrades,
+  login,
+  register,
   
 } from "../controllers/teacherController";
 import { ChangeStream } from "mongodb";
+import authMiddleware from "../middleware/authMiddleware";
 
 const teacherRouter = Router();
-
+teacherRouter.post("/register", register);
+teacherRouter.post("/login", login);
+teacherRouter.use(authMiddleware);
 teacherRouter.put("/:id", addGrade);
 teacherRouter.get("/:id", getGrades);
 teacherRouter.put("/:id", changGrade);

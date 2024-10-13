@@ -2,10 +2,10 @@ import mongoose, { Schema, Document, Types } from "mongoose";
 import validator from "validator";
 
 export interface IClass {
-  _id: Types.ObjectId;
+  _id?: Types.ObjectId;
   name: string;
   teacher: Types.ObjectId;
-  students: Types.ObjectId[];
+  students?: Types.ObjectId[];
 }                                                         
 
 

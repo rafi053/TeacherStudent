@@ -1,38 +1,64 @@
 import { IUser } from "../models/userModel.js";
-import * as Data from "../DAL/data.js";
-import e from "express";
+import * as teacherData from "../DAL/teacherData.js";
+import { ITeacher } from "../models/teacherModel.js";
+import { IClass } from "../models/classModel.js";
+import { IGrade, IStudent } from "../models/studentModel.js";
+import { stdout } from "process";
 
-export const getGrades = async (): Promise<IUser[]> => {
-  const users: IUser[] = await Data.getGrades();
-  return users;
+
+export const register = async (name: string, email: string, password: string, classRoom: string): Promise<ITeacher | undefined> => {
+  let newTeacher = {
+    name,
+    email,
+    password,
+  }
+
+  const teacherToAdd: ITeacher = await teacherData.register(newTeacher);
+  if (teacherToAdd._id){
+    let newClass = {
+    name: classRoom,
+    teacher: teacherToAdd._id
+  }
+  await teacherData.addClass(newClass);
+  return teacherToAdd
+  }
+}
+
+
+
+export const login = async (email: string, password: string): Promise<ITeacher | null> => {
+  const teacher: ITeacher | null = await teacherData.login(email, password);  
+  return teacher;
 };
 
 
-export const addGrade = async (id: string): Promise<IUser> => {
-  const user: IUser = await Data.addGrade(id);
-  return user;
+export const getGrades = async (): Promise<IStudent[] | null> => {
+  const students: IStudent[] | null = await teacherData.getGrades();
+  return students;
+}
+
+
+export const addGrade = async (id: string, grade: IGrade): Promise<IStudent | null> => {
+  const status: IStudent | null = await teacherData.addGrade(id, grade);
+  return status;
 };
 
 
-export const changGrade = async (id: string): Promise<IUser> => {
-  const user: IUser = await Data.changGrade(id);
-  return user;
+export const changGrade = async (id: string, grade: IGrade): Promise<IStudent> => {
+  const student: any = await teacherData.changGrade(id, grade);
+  return student;
 };
 
 
-export const getAverageGrades = async (id: string): Promise<number> => {
-  const grade: number = await Data.getAverageGrades(id);
-  return grade;
+export const getAverageGrades = async (): Promise<number> => {
+  const status: any = await teacherData.getGrades();
+  return status;
 };
 
 
-export const getStudents = async (): Promise<IUser[]> => {
-  const user: IUser[] = await Data.getStudents();
-  return user;
-};
 
 
 export const getAllDetails = async (): Promise<IUser[]> => {
-  const users: IUser[] = await Data.getAllDetails();
+  const users: IUser[] = await teacherData.getAllDetails();
   return users;
 }

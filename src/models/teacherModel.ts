@@ -3,11 +3,11 @@ import validator from "validator";
 
 
 export interface ITeacher {
-  _id: Types.ObjectId;
+  _id?: Types.ObjectId;
   name: string;
   email: string;
   password: string;
-  class: Types.ObjectId;
+  class?: Types.ObjectId;
 }
 
 

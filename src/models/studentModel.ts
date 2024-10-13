@@ -14,7 +14,7 @@ export interface IStudent {
   email: string;
   password: string;
   classId: Types.ObjectId;
-  grades: IGrade[];
+  grades?: IGrade[];
 }
 
 const StudentSchema = new Schema({

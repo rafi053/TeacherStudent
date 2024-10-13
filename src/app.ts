@@ -19,9 +19,7 @@ app.use(express.json());
 app.use('/swagger',swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 connectDB();
 
-app.use("/", authRouter);
 
-app.use(authMiddleware);
 app.use("teachers", teacherRouter);
 app.use("students", studentRouter);
 
