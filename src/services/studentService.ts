@@ -1,4 +1,3 @@
-import { IUser } from "../models/userModel.js";
 import * as studentData from "../DAL/studentData.js";
 import { IStudent } from "../models/studentModel.js";
 

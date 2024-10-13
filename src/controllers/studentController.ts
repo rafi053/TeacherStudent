@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { ResponseStructure } from "../types/response";
-import { IUser } from "../models/userModel";
 import * as Student from "../services/studentService";
 import jwt from 'jsonwebtoken';
 

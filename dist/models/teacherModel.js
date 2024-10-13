@@ -53,4 +53,4 @@ const TeacherSchema = new mongoose_1.Schema({
         ref: "Class",
     },
 });
-exports.default = mongoose_1.default.model("Post", TeacherSchema);
+exports.default = mongoose_1.default.model("Teacher", TeacherSchema);

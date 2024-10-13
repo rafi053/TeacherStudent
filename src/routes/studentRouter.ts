@@ -5,8 +5,9 @@ import authMiddleware from "../middleware/authMiddleware";
 
 const studentRouter = Router();
 
-
 studentRouter.post("/register", register);
+
+
 studentRouter.post("/login", login);
 studentRouter.use(authMiddleware);
 studentRouter.get("/:id", getGrades);

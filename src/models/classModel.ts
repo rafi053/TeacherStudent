@@ -32,4 +32,4 @@ const ClassSchema = new Schema({
   ],
 });
 
-export default mongoose.model<IClass>("Post", ClassSchema);
+export default mongoose.model<IClass>("Class", ClassSchema);

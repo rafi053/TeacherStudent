@@ -109,7 +109,8 @@ const getAverageGrades = (req, res, next) => __awaiter(void 0, void 0, void 0, f
 exports.getAverageGrades = getAverageGrades;
 const getAllDetails = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const users = yield Teacher.getAllDetails();
+        const id = req.params.id;
+        const users = yield Teacher.getAllDetails(id);
         const response = new response_1.ResponseStructure(true, users);
         res.status(200).json(response);
     }

@@ -44,4 +44,4 @@ const ClassSchema = new mongoose_1.Schema({
         },
     ],
 });
-exports.default = mongoose_1.default.model("Post", ClassSchema);
+exports.default = mongoose_1.default.model("Class", ClassSchema);

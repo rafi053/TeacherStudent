@@ -76,8 +76,8 @@ const getAverageGrades = () => __awaiter(void 0, void 0, void 0, function* () {
     return status;
 });
 exports.getAverageGrades = getAverageGrades;
-const getAllDetails = () => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield teacherData.getAllDetails();
+const getAllDetails = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield teacherData.getAllDetails(id);
     return users;
 });
 exports.getAllDetails = getAllDetails;

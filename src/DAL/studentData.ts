@@ -1,7 +1,6 @@
 import Student, { IStudent } from "../models/studentModel";
 import Teacher, { ITeacher } from "../models/teacherModel";
 import Class, { IClass } from "../models/classModel";
-import { IUser } from "../models/userModel";
 import exp from "constants";
 import e from "express";
 import { ExitStatus } from "typescript";
@@ -20,13 +19,19 @@ export  const  register = async (student: IStudent): Promise<IStudent> => {
 
 
 export  const  login = async (email: string, password: string): Promise<IStudent | null> => {
-    const teacher: IStudent | null = await Teacher.findOne({ email: email, password: password });
+    const teacher: IStudent | null = await Student.findOne({ email: email, password: password });
     return teacher;
 }
 
 
 export  const  getGrades = async (id: string): Promise<IStudent | null> => {
-    const students: IStudent | null = await Class.findById(id);
+    const students: IStudent | null = await Student.findById(id).populate(
+        {
+            path: "classId",
+            select: "name, teacher",
+            
+        }
+    );
     return students;
 }
 

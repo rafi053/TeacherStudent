@@ -30,8 +30,14 @@ const login = (email, password) => __awaiter(void 0, void 0, void 0, function* (
     return teacher;
 });
 exports.login = login;
-const getAllDetails = () => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield teacherModel_1.default.find();
+const getAllDetails = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield teacherModel_1.default.findById(id).populate({
+        path: "classId",
+        select: "name, teacher",
+    }).populate({
+        path: "classId.teacher",
+        select: "name email profile",
+    });
     return users;
 });
 exports.getAllDetails = getAllDetails;

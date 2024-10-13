@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addToClass = exports.getGrades = exports.login = exports.register = exports.getClass = void 0;
 const studentModel_1 = __importDefault(require("../models/studentModel"));
-const teacherModel_1 = __importDefault(require("../models/teacherModel"));
 const classModel_1 = __importDefault(require("../models/classModel"));
 const getClass = (classRoom) => __awaiter(void 0, void 0, void 0, function* () {
     const classRoomDetails = yield classModel_1.default.findOne({ name: classRoom });
@@ -27,12 +26,15 @@ const register = (student) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.register = register;
 const login = (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const teacher = yield teacherModel_1.default.findOne({ email: email, password: password });
+    const teacher = yield studentModel_1.default.findOne({ email: email, password: password });
     return teacher;
 });
 exports.login = login;
 const getGrades = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const students = yield classModel_1.default.findById(id);
+    const students = yield studentModel_1.default.findById(id).populate({
+        path: "classId",
+        select: "name, teacher",
+    });
     return students;
 });
 exports.getGrades = getGrades;

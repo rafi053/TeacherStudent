@@ -1,7 +1,6 @@
 import Student, { IGrade, IStudent } from "../models/studentModel";
 import Teacher, { ITeacher } from "../models/teacherModel";
 import Class, { IClass } from "../models/classModel";
-import { IUser } from "../models/userModel";
 
 
 
@@ -22,8 +21,18 @@ export  const  login = async (email: string, password: string): Promise<ITeacher
 
 
 
-export  const  getAllDetails = async (): Promise<IUser[]> => {
-    const users: IUser[] = await Teacher.find();
+export  const  getAllDetails = async (id: string): Promise<ITeacher | null> => {
+    const users: ITeacher | null = await Teacher.findById(id).populate(
+        {
+            path: "classId",
+            select: "name, teacher",
+        }
+    ).populate(
+        {
+            path: "classId.teacher",
+            select: "name email profile",
+        }
+    )
     return users;
 };
 

@@ -43,4 +43,4 @@ const StudentSchema = new Schema({
     }
 });
 
-export default mongoose.model<IStudent>("Post", StudentSchema);
+export default mongoose.model<IStudent>("Student", StudentSchema);

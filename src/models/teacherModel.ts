@@ -39,4 +39,4 @@ const TeacherSchema = new Schema({
   
 });
 
-export default mongoose.model<ITeacher>("Post", TeacherSchema);
+export default mongoose.model<ITeacher>("Teacher", TeacherSchema);

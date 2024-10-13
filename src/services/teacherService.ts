@@ -1,4 +1,3 @@
-import { IUser } from "../models/userModel.js";
 import * as teacherData from "../DAL/teacherData.js";
 import { ITeacher } from "../models/teacherModel.js";
 import { IClass } from "../models/classModel.js";
@@ -58,7 +57,7 @@ export const getAverageGrades = async (): Promise<number> => {
 
 
 
-export const getAllDetails = async (): Promise<IUser[]> => {
-  const users: IUser[] = await teacherData.getAllDetails();
+export const getAllDetails = async (id: string ): Promise<ITeacher | null> => {
+  const users: ITeacher | null = await teacherData.getAllDetails( id );
   return users;
 }

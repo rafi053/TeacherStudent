@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import  { IUser } from "../models/userModel";
 import { ResponseStructure } from "../types/response";
 import * as Teacher from "../services/teacherService";
 import jwt from 'jsonwebtoken';
@@ -95,8 +94,10 @@ export const getAllDetails = async (
   res: Response,
   next: NextFunction
 ) => {
+ 
   try {
-    const users: IUser[] = await Teacher.getAllDetails();
+    const id = req.params.id;
+    const users: ITeacher | null = await Teacher.getAllDetails(id);
     const response = new ResponseStructure(true, users);
     res.status(200).json(response);
   } catch (error) {
